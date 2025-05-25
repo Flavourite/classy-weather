@@ -9,27 +9,27 @@ const year = today.getFullYear();
 const fullDate = `${year}-${month}-${day}`;
 
 const weatherCodeToIcon = {
-  0: '☀️',
-  1: '🌤️',
-  2: '⛅',
-  3: '☁️',
-  45: '🌫️',
-  48: '🌫️',
-  51: '🌦️',
-  53: '🌦️',
-  55: '🌦️',
-  61: '🌧️',
-  63: '🌧️',
-  65: '🌧️',
-  71: '❄️',
-  73: '❄️',
-  75: '❄️',
-  80: '🌦️',
-  81: '🌦️',
-  82: '🌦️',
-  95: '⛈️',
-  96: '⛈️',
-  99: '⛈️',
+  0: { icon: '☀️', label: 'Clear sky' },
+  1: { icon: '🌤️', label: 'Mainly clear' },
+  2: { icon: '⛅', label: 'Partly cloudy' },
+  3: { icon: '☁️', label: 'Overcast' },
+  45: { icon: '🌫️', label: 'Fog' },
+  48: { icon: '🌫️', label: 'Depositing rime fog' },
+  51: { icon: '🌦️', label: 'Light drizzle' },
+  53: { icon: '🌦️', label: 'Moderate drizzle' },
+  55: { icon: '🌦️', label: 'Dense drizzle' },
+  61: { icon: '🌧️', label: 'Slight rain' },
+  63: { icon: '🌧️', label: 'Moderate rain' },
+  65: { icon: '🌧️', label: 'Heavy rain' },
+  71: { icon: '❄️', label: 'Slight snow fall' },
+  73: { icon: '❄️', label: 'Moderate snow fall' },
+  75: { icon: '❄️', label: 'Heavy snow fall' },
+  80: { icon: '🌦️', label: 'Slight rain showers' },
+  81: { icon: '🌦️', label: 'Moderate rain showers' },
+  82: { icon: '🌦️', label: 'Violent rain showers' },
+  95: { icon: '⛈️', label: 'Thunderstorm' },
+  96: { icon: '⛈️', label: 'Thunderstorm with slight hail' },
+  99: { icon: '⛈️', label: 'Thunderstorm with heavy hail' },
 };
 
 export default function App() {
@@ -114,7 +114,7 @@ export default function App() {
         <h2>
           {
             <>
-              Weather in {name}, {country}{' '}
+              Weather forecast in {name}, {country}{' '}
               <img
                 src={`https://flagcdn.com/48x36/${country_code?.toLowerCase()}.png`}
                 alt={country}
@@ -172,8 +172,17 @@ function Weather({ lon, lat }) {
           {daily?.time.map((day, i) => (
             <li className="day" key={day}>
               <span className="important">
-                {weatherCodeToIcon[daily.weathercode[i]]}
+                {weatherCodeToIcon[daily.weathercode[i]].icon}
               </span>
+              <p
+                style={{
+                  fontSize: '12px',
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                }}
+              >
+                {weatherCodeToIcon[daily.weathercode[i]].label}
+              </p>
               <p>{day === fullDate ? 'Today' : day}</p>
               <em className="temp">
                 {daily.temperature_2m_min[i]}°C - {daily.temperature_2m_max[i]}
