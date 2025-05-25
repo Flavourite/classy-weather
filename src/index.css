@@ -15,7 +15,9 @@ body {
   font-size: 2rem;
   min-height: 100vh; /* changed from height */
   color: #222;
-  background-color: #eabfb9;
+  /* background-color: #eabfb9; */
+  background-color: #b9ceea;
+
   display: flex;
   align-items: center;
   justify-content: center;
