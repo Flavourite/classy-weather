@@ -200,10 +200,12 @@ function Weather({ lon, lat }) {
                   {weatherCodeToIcon[daily.weathercode[i]].label}
                 </p>
                 {/* <p>{day === fullDate ? 'Today' : day}</p> */}
-                <p>{getWeekDays(i)}</p>
+                <p style={{ fontSize: '20px', fontFamily: 'fantasy' }}>
+                  {getWeekDays(i)}
+                </p>
                 <em className="temp">
-                  {daily.temperature_2m_min[i]}°C -{' '}
-                  {daily.temperature_2m_max[i]}
+                  {Math.round(daily.temperature_2m_min[i])}°C -{' '}
+                  {Math.round(daily.temperature_2m_max[i])}
                   °C
                 </em>
               </li>
