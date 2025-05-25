@@ -13,12 +13,13 @@ html {
 body {
   font-family: 'Cinzel Decorative', cursive;
   font-size: 2rem;
-  height: 100vh;
+  min-height: 100vh; /* changed from height */
   color: #222;
   background-color: #eabfb9;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem; /* added padding so content doesn't touch edges */
 }
 
 .app {
@@ -26,7 +27,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 112rem;
-  height: 90vh;
+  min-height: 90vh; /* changed from fixed height */
   gap: 4rem;
   padding: 6rem 0;
   border: 2px solid #222;
@@ -94,4 +95,69 @@ input:focus {
 
 .temp {
   font-size: 1.9rem;
+}
+
+/* For tablets and medium screens */
+@media (max-width: 768px) {
+  .app {
+    width: 90vw;
+    min-height: auto; /* let height grow naturally on smaller screens */
+    padding: 3rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 1.2rem 2rem;
+  }
+
+  .weather {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.6rem;
+  }
+
+  .day {
+    width: 10rem;
+  }
+}
+
+/* For phones and small screens */
+@media (max-width: 480px) {
+  body {
+    font-size: 1.6rem; /* smaller base font */
+  }
+
+  .app {
+    width: 95vw;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 3.2rem;
+    text-align: center;
+  }
+
+  input {
+    font-size: 1.6rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .weather {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .day {
+    width: 80vw;
+    padding: 1rem 0;
+  }
+
+  .day span {
+    font-size: 4rem;
+  }
 }
