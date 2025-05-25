@@ -99,7 +99,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>CLASSY-WEATHER</h1>
+      <h1>WEATHER-FORCAST</h1>
       <input
         value={location}
         onChange={e => setLocation(e.target.value)}
@@ -134,6 +134,21 @@ function Weather({ lon, lat }) {
   const [weatherError, setWeatherError] = useState('');
 
   const { daily } = dailyWeatherConditions || {};
+
+  function getWeekDays(i) {
+    // const date = daily?.time.map((date, i) => new Date(date));
+    // console.log(date[i].slice(' ', 1));
+    // // return date;
+
+    if (!daily?.time[i]) return '';
+    const date = new Date(daily.time[i]);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    });
+    // return date.toLocaleDateString('en-US', { weekday: 'short' });
+  }
 
   useEffect(
     function () {
@@ -170,25 +185,29 @@ function Weather({ lon, lat }) {
       {!weatherError && (
         <ul className="weather">
           {daily?.time.map((day, i) => (
-            <li className="day" key={day}>
-              <span className="important">
-                {weatherCodeToIcon[daily.weathercode[i]].icon}
-              </span>
-              <p
-                style={{
-                  fontSize: '12px',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                }}
-              >
-                {weatherCodeToIcon[daily.weathercode[i]].label}
-              </p>
-              <p>{day === fullDate ? 'Today' : day}</p>
-              <em className="temp">
-                {daily.temperature_2m_min[i]}°C - {daily.temperature_2m_max[i]}
-                °C
-              </em>
-            </li>
+            <>
+              <li className="day" key={day}>
+                <span className="important">
+                  {weatherCodeToIcon[daily.weathercode[i]].icon}
+                </span>
+                <p
+                  style={{
+                    fontSize: '12px',
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {weatherCodeToIcon[daily.weathercode[i]].label}
+                </p>
+                {/* <p>{day === fullDate ? 'Today' : day}</p> */}
+                <p>{getWeekDays(i)}</p>
+                <em className="temp">
+                  {daily.temperature_2m_min[i]}°C -{' '}
+                  {daily.temperature_2m_max[i]}
+                  °C
+                </em>
+              </li>
+            </>
           ))}
         </ul>
       )}
